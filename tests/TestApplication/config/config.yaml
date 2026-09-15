@@ -1,0 +1,7 @@
+imports:
+    - { resource: '@CalmfoxSyliusAdminInvitationPlugin/config/config.yaml' }
+
+sylius_mailer:
+    sender:
+        name: Test shop
+        address: shop@example.com

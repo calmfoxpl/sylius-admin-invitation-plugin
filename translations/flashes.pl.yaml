@@ -1,0 +1,13 @@
+calmfox_admin_invitation:
+    invitation:
+        sent: Zaproszenie zostało wysłane.
+        not_sent: 'Konto zostało utworzone, ale nie udało się wysłać zaproszenia na %email%. Sprawdź konfigurację poczty i wyślij je ponownie: bin/console calmfox:admin:invite %email%'
+        invalid: Link z zaproszenia wygasł albo został już użyty. Poproś administratora o ponowne zaproszenie.
+        accepted: Witaj! Twoje konto jest gotowe.
+    access_link:
+        invitation_resent: 'Zaproszenie zostało ponownie wysłane na %email%.'
+        reset_sent: 'Link do resetu hasła został wysłany na %email%.'
+        not_sent: 'Nie udało się wysłać wiadomości na %email%. Sprawdź konfigurację poczty.'
+    password_reset:
+        invalid: Link do resetu hasła wygasł albo został już użyty. Poproś administratora o nowy.
+        done: Nowe hasło jest zapisane. Zaloguj się nim.

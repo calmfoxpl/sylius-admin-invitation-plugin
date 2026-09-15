@@ -1,0 +1,13 @@
+calmfox_admin_invitation:
+    invitation:
+        sent: The invitation has been sent.
+        not_sent: 'The account was created, but the invitation to %email% could not be sent. Check the mailer and resend it with: bin/console calmfox:admin:invite %email%'
+        invalid: This invitation link has expired or has already been used. Ask an administrator to invite you again.
+        accepted: Welcome! Your account is ready.
+    access_link:
+        invitation_resent: 'The invitation has been sent to %email% again.'
+        reset_sent: 'A password reset link has been sent to %email%.'
+        not_sent: 'The e-mail to %email% could not be sent. Check the mailer configuration.'
+    password_reset:
+        invalid: This password reset link has expired or has already been used. Ask an administrator for a new one.
+        done: Your new password is saved. Log in with it.

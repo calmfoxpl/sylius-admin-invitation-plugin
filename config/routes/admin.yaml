@@ -1,0 +1,40 @@
+calmfox_admin_invitation_admin_user_invite:
+    path: /users/invite
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.admin_user::createAction
+        _sylius:
+            section: admin
+            permission: true
+            event: invite
+            template: '@CalmfoxSyliusAdminInvitationPlugin/admin/admin_user/invite.html.twig'
+            form: Calmfox\SyliusAdminInvitationPlugin\Form\Type\InviteAdminUserType
+            redirect:
+                route: sylius_admin_admin_user_index
+                parameters: []
+            flash: calmfox_admin_invitation.invitation.sent
+            vars:
+                index:
+                    route:
+                        name: sylius_admin_admin_user_index
+
+# Public (the invitee has no password yet): granted by RouteAccessMap, no access_control rule needed.
+calmfox_admin_invitation_accept:
+    path: /invitation/{token}
+    methods: [GET, POST]
+    defaults:
+        _controller: calmfox_admin_invitation.controller.accept_invitation
+
+# "Let this person back in": the invitation again for a pending account, a password reset link otherwise.
+calmfox_admin_invitation_send_access_link:
+    path: /users/{id}/access-link
+    methods: [POST]
+    defaults:
+        _controller: calmfox_admin_invitation.controller.send_access_link
+
+# Public, next to Sylius' own "forgotten password" pages.
+calmfox_admin_invitation_password_reset:
+    path: /forgotten-password/link/{token}
+    methods: [GET, POST]
+    defaults:
+        _controller: calmfox_admin_invitation.controller.reset_password

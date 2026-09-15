@@ -1,0 +1,26 @@
+{#
+    "Account access" card on the administrator edit page. It sits inside the edit form, so the
+    button submits a separate form rendered outside it (access_link_form.html.twig).
+#}
+{% set adminUser = hookable_metadata.context.resource %}
+{% set pending = not adminUser.enabled and adminUser.password is null %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ 'calmfox_admin_invitation.ui.account_access'|trans }}</div>
+    </div>
+    <div class="card-body">
+        <p class="text-secondary">
+            {% if pending %}
+                {{ 'calmfox_admin_invitation.ui.access_pending'|trans }}
+            {% else %}
+                {{ 'calmfox_admin_invitation.ui.access_active'|trans }}
+            {% endif %}
+        </p>
+        <button type="submit" class="btn" form="calmfox-admin-access-link"
+                onclick="return confirm({{ ((pending ? 'calmfox_admin_invitation.access_link.confirm_invitation' : 'calmfox_admin_invitation.access_link.confirm_reset')|trans({'%email%': adminUser.email}))|json_encode }});">
+            {{ ux_icon(pending ? 'tabler:mail-forward' : 'tabler:key', {class: 'icon'}) }}
+            {{ (pending ? 'calmfox_admin_invitation.ui.resend_invitation' : 'calmfox_admin_invitation.ui.send_password_reset')|trans }}
+        </button>
+    </div>
+</div>

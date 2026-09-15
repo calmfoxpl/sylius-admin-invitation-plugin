@@ -1,0 +1,8 @@
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+
+{{ button.default({
+    text: 'calmfox_admin_invitation.ui.invite'|trans,
+    url: path('calmfox_admin_invitation_admin_user_invite'),
+    icon: 'tabler:mail-plus',
+    class: 'btn',
+}) }}

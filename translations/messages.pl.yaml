@@ -1,0 +1,38 @@
+calmfox_admin_invitation:
+    ui:
+        invite: Zaproś
+        invite_administrator: Zaproś administratora
+        invite_help: Wyślemy na ten adres link. Zaproszona osoba sama ustawi imię, nazwisko i hasło.
+        send_invitation: Wyślij zaproszenie
+        accept_invitation: Załóż konto
+        accept_invitation_lead: 'Zaproszono Cię do panelu administracyjnego jako %email%.'
+        accept_and_log_in: Zapisz i zaloguj
+        password_requirements: 'Co najmniej %min_length% znaków i trudne do odgadnięcia: wielkie i małe litery, cyfry i znaki specjalne.'
+        generate_password: Wygeneruj bezpieczne hasło
+        generated_password: Wygenerowane hasło
+        generated_password_hint: Zapisz je w menedżerze haseł, zanim przejdziesz dalej.
+        copy: Kopiuj
+        copied: Skopiowano
+        send_access_link: Wyślij link dostępu
+        resend_invitation: Wyślij zaproszenie ponownie
+        send_password_reset: Wyślij link do resetu hasła
+        account_access: Dostęp do konta
+        access_pending: Zaproszenie nie zostało jeszcze przyjęte. Możesz wysłać je ponownie z nowym linkiem.
+        access_active: Administrator dostanie mailem link, pod którym sam ustawi nowe hasło. Do tego czasu działa dotychczasowe hasło.
+        password_reset_title: Ustaw nowe hasło
+        password_reset_lead: 'Nowe hasło dla %email%.'
+        password_reset_submit: Zapisz nowe hasło
+    email:
+        subject: Zaproszenie do panelu administracyjnego
+        hello: Witaj
+        invited_to_panel: 'Zaproszono Cię do panelu administracyjnego. Kliknij przycisk, aby ustawić imię, nazwisko i hasło'
+        accept: Załóż konto
+        login: Twój login
+    password_reset_email:
+        subject: Ustaw nowe hasło do panelu administracyjnego
+        lead: 'Administrator wysłał Ci link do ustawienia nowego hasła w panelu administracyjnym. Kliknij przycisk i ustaw je samodzielnie'
+        action: Ustaw nowe hasło
+        details: 'Link jest ważny do %date%. Jeśli nie spodziewasz się tej wiadomości, zignoruj ją — dotychczasowe hasło nadal działa.'
+    access_link:
+        confirm_invitation: 'Wysłać ponownie zaproszenie do %email%?'
+        confirm_reset: 'Wysłać link do resetu hasła na %email%?'

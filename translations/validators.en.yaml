@@ -1,0 +1,8 @@
+calmfox_admin_invitation:
+    first_name:
+        not_blank: Please enter your first name.
+    last_name:
+        not_blank: Please enter your last name.
+    password:
+        too_weak: This password is too easy to guess. Make it longer and mix letters, digits and symbols, or use the generator.
+        compromised: This password has appeared in a data breach. Please choose a different one.

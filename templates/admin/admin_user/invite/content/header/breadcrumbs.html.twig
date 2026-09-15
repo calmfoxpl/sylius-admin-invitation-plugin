@@ -1,0 +1,7 @@
+{% from '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
+
+{{ breadcrumbs([
+    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: 'sylius.ui.admin_users', url: path('sylius_admin_admin_user_index'), active: false },
+    { name: 'calmfox_admin_invitation.ui.invite', active: true },
+]) }}

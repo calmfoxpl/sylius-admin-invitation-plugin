@@ -1,0 +1,23 @@
+imports:
+    - { resource: 'twig_hooks/*.yaml' }
+
+sylius_mailer:
+    emails:
+        calmfox_admin_password_reset:
+            subject: calmfox_admin_invitation.password_reset_email.subject
+            template: '@CalmfoxSyliusAdminInvitationPlugin/email/password_reset.html.twig'
+        calmfox_admin_invitation:
+            subject: calmfox_admin_invitation.email.subject
+            template: '@CalmfoxSyliusAdminInvitationPlugin/email/invitation.html.twig'
+
+sylius_grid:
+    templates:
+        action:
+            calmfox_access_link: '@CalmfoxSyliusAdminInvitationPlugin/admin/grid/action/access_link.html.twig'
+    grids:
+        sylius_admin_admin_user:
+            actions:
+                item:
+                    access_link:
+                        type: calmfox_access_link
+                        label: calmfox_admin_invitation.ui.send_access_link

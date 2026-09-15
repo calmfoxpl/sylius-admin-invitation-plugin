@@ -1,0 +1,7 @@
+{% set form = hookable_metadata.context.form %}
+
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+{{ form_start(form, {'action': path('calmfox_admin_invitation_accept', {'token': hookable_metadata.context.token}), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+    {% hook 'form' with { form } %}
+{{ form_end(form, {'render_rest': true}) }}

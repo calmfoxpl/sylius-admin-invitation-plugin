@@ -1,0 +1,135 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    # the invitee and someone with a reset link have no password yet
+    calmfox_admin_invitation.security.access_map:
+        class: Calmfox\SyliusAdminInvitationPlugin\Security\RouteAccessMap
+        decorates: security.access_map
+        arguments:
+            $decorated: '@.inner'
+            $attributesByRoute:
+                calmfox_admin_invitation_accept: ['PUBLIC_ACCESS']
+                calmfox_admin_invitation_password_reset: ['PUBLIC_ACCESS']
+
+    calmfox_admin_invitation.sender:
+        class: Calmfox\SyliusAdminInvitationPlugin\Invitation\InvitationSender
+        arguments:
+            $tokenGenerator: '@sylius.admin_user.token_generator.password_reset'
+            $emailSender: '@sylius.email_sender'
+            $adminUserManager: '@sylius.manager.admin_user'
+            $urlGenerator: '@router'
+            $defaultLocaleCode: '%kernel.default_locale%'
+
+    Calmfox\SyliusAdminInvitationPlugin\Invitation\InvitationSenderInterface:
+        alias: calmfox_admin_invitation.sender
+
+    calmfox_admin_invitation.password_reset_link_sender:
+        class: Calmfox\SyliusAdminInvitationPlugin\Invitation\PasswordResetLinkSender
+        arguments:
+            $tokenGenerator: '@sylius.admin_user.token_generator.password_reset'
+            $emailSender: '@sylius.email_sender'
+            $adminUserManager: '@sylius.manager.admin_user'
+            $urlGenerator: '@router'
+            $defaultLocaleCode: '%kernel.default_locale%'
+            $ttl: '%calmfox_sylius_admin_invitation.password_reset_ttl%'
+
+    Calmfox\SyliusAdminInvitationPlugin\Invitation\PasswordResetLinkSender:
+        alias: calmfox_admin_invitation.password_reset_link_sender
+
+    calmfox_admin_invitation.controller.send_access_link:
+        class: Calmfox\SyliusAdminInvitationPlugin\Controller\SendAccessLinkAction
+        public: true
+        arguments:
+            $adminUserRepository: '@sylius.repository.admin_user'
+            $invitationSender: '@calmfox_admin_invitation.sender'
+            $passwordResetLinkSender: '@calmfox_admin_invitation.password_reset_link_sender'
+            $csrfTokenManager: '@security.csrf.token_manager'
+            $urlGenerator: '@router'
+            $logger: '@logger'
+        tags: ['controller.service_arguments']
+
+    calmfox_admin_invitation.controller.reset_password:
+        class: Calmfox\SyliusAdminInvitationPlugin\Controller\ResetPasswordAction
+        public: true
+        arguments:
+            $adminUserRepository: '@sylius.repository.admin_user'
+            $adminUserManager: '@sylius.manager.admin_user'
+            $passwordUpdater: '@sylius.security.password_updater'
+            $passwordPolicy: '@calmfox_admin_invitation.password_policy'
+            $formFactory: '@form.factory'
+            $urlGenerator: '@router'
+            $twig: '@twig'
+            $ttl: '%calmfox_sylius_admin_invitation.password_reset_ttl%'
+        tags: ['controller.service_arguments']
+
+    calmfox_admin_invitation.form.type.reset_password:
+        class: Calmfox\SyliusAdminInvitationPlugin\Form\Type\ResetPasswordType
+        arguments:
+            $passwordPolicy: '@calmfox_admin_invitation.password_policy'
+        tags: ['form.type']
+
+    calmfox_admin_invitation.form.type.repeated_password:
+        class: Calmfox\SyliusAdminInvitationPlugin\Form\Type\RepeatedPasswordType
+        tags: ['form.type']
+
+    calmfox_admin_invitation.form.type.invite_admin_user:
+        class: Calmfox\SyliusAdminInvitationPlugin\Form\Type\InviteAdminUserType
+        arguments:
+            $dataClass: '%sylius.model.admin_user.class%'
+            $security: '@security.helper'
+            $defaultLocaleCode: '%kernel.default_locale%'
+        tags: ['form.type']
+
+    calmfox_admin_invitation.password_policy:
+        class: Calmfox\SyliusAdminInvitationPlugin\Password\PasswordPolicy
+        factory: [Calmfox\SyliusAdminInvitationPlugin\Password\PasswordPolicy, fromConfig]
+        arguments: ['%calmfox_sylius_admin_invitation.password%']
+
+    Calmfox\SyliusAdminInvitationPlugin\Password\PasswordPolicy:
+        alias: calmfox_admin_invitation.password_policy
+
+    calmfox_admin_invitation.form.type.accept_invitation:
+        class: Calmfox\SyliusAdminInvitationPlugin\Form\Type\AcceptInvitationType
+        arguments:
+            $passwordPolicy: '@calmfox_admin_invitation.password_policy'
+        tags: ['form.type']
+
+    calmfox_admin_invitation.listener.send_invitation:
+        class: Calmfox\SyliusAdminInvitationPlugin\EventListener\SendInvitationListener
+        arguments:
+            $invitationSender: '@calmfox_admin_invitation.sender'
+            $requestStack: '@request_stack'
+            $logger: '@logger'
+        tags:
+            - { name: kernel.event_listener, event: sylius.admin_user.post_invite }
+
+    calmfox_admin_invitation.controller.accept_invitation:
+        class: Calmfox\SyliusAdminInvitationPlugin\Controller\AcceptInvitationAction
+        public: true
+        arguments:
+            $adminUserRepository: '@sylius.repository.admin_user'
+            $adminUserManager: '@sylius.manager.admin_user'
+            $passwordUpdater: '@sylius.security.password_updater'
+            $formFactory: '@form.factory'
+            $security: '@security.helper'
+            $urlGenerator: '@router'
+            $twig: '@twig'
+            $eventDispatcher: '@event_dispatcher'
+            $passwordPolicy: '@calmfox_admin_invitation.password_policy'
+            $ttl: '%calmfox_sylius_admin_invitation.ttl%'
+            $firewallName: '%calmfox_sylius_admin_invitation.firewall%'
+        tags: ['controller.service_arguments']
+
+    calmfox_admin_invitation.command.invite_admin_user:
+        class: Calmfox\SyliusAdminInvitationPlugin\Command\InviteAdminUserCommand
+        arguments:
+            $invitationSender: '@calmfox_admin_invitation.sender'
+            $adminUserRepository: '@sylius.repository.admin_user'
+            $adminUserFactory: '@sylius.factory.admin_user'
+            $adminUserManager: '@sylius.manager.admin_user'
+            $validator: '@validator'
+            $defaultLocaleCode: '%kernel.default_locale%'
+        tags: ['console.command']

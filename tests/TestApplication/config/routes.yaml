@@ -1,0 +1,3 @@
+calmfox_sylius_admin_invitation_admin:
+    resource: '@CalmfoxSyliusAdminInvitationPlugin/config/routes/admin.yaml'
+    prefix: '/%sylius_admin.path_name%'

@@ -1,0 +1,72 @@
+{
+    "name": "calmfox/sylius-admin-invitation-plugin",
+    "type": "sylius-plugin",
+    "description": "Invite Sylius administrators by e-mail: type an address, the invitee sets their own name and password.",
+    "keywords": [
+        "sylius",
+        "sylius-plugin",
+        "admin",
+        "invitation"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Calmfox",
+            "homepage": "https://calmfox.pl"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "sylius/sylius": "^2.1",
+        "symfony/validator": "^7.1"
+    },
+    "require-dev": {
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-doctrine": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0",
+        "phpunit/phpunit": "^11.5",
+        "sylius-labs/coding-standard": "^4.4",
+        "sylius/test-application": "^2.0.0@alpha",
+        "symfony/browser-kit": "^7.4",
+        "symfony/css-selector": "^7.4",
+        "symfony/debug-bundle": "^7.4",
+        "symfony/dotenv": "^7.4",
+        "symfony/intl": "^7.4",
+        "symfony/web-profiler-bundle": "^7.4",
+        "symfony/webpack-encore-bundle": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Calmfox\\SyliusAdminInvitationPlugin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Calmfox\\SyliusAdminInvitationPlugin\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "php-http/discovery": false,
+            "phpstan/extension-installer": true,
+            "symfony/flex": true,
+            "symfony/runtime": false,
+            "symfony/thanks": false
+        }
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "^7.4"
+        },
+        "branch-alias": {
+            "dev-main": "1.0-dev"
+        },
+        "public-dir": "vendor/sylius/test-application/public"
+    },
+    "prefer-stable": true
+}

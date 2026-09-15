@@ -1,0 +1,8 @@
+calmfox_admin_invitation:
+    first_name:
+        not_blank: Podaj imię.
+    last_name:
+        not_blank: Podaj nazwisko.
+    password:
+        too_weak: To hasło jest za łatwe do odgadnięcia. Wydłuż je i mieszaj litery, cyfry i znaki specjalne albo użyj generatora.
+        compromised: To hasło wyciekło w jednym ze znanych wycieków danych. Wybierz inne.

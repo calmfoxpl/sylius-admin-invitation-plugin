@@ -1,0 +1,38 @@
+{#
+    Invitation e-mail. Variables: adminUser, invitationUrl, localeCode.
+
+    Each part is a block, so an application can restyle only what it needs, e.g. in
+    templates/bundles/CalmfoxSyliusAdminInvitationPlugin/email/invitation.html.twig:
+
+        {% extends '@!CalmfoxSyliusAdminInvitationPlugin/email/invitation.html.twig' %}
+        {% block action %}<a href="{{ invitationUrl }}" class="my-button">…</a>{% endblock %}
+#}
+{% extends '@CalmfoxSyliusAdminInvitationPlugin/email/layout.html.twig' %}
+
+{% block subject %}
+    {{ 'calmfox_admin_invitation.email.subject'|trans({}, null, localeCode)|raw }}
+{% endblock %}
+
+{% block content %}
+    {% block heading %}
+        <div style="text-align: center; font-size: 24px;">{{ 'calmfox_admin_invitation.email.hello'|trans({}, null, localeCode) }}</div>
+    {% endblock %}
+
+    {% block lead %}
+        <p style="text-align: center; margin: 0 0 30px 0;">{{ 'calmfox_admin_invitation.email.invited_to_panel'|trans({}, null, localeCode) }}</p>
+    {% endblock %}
+
+    {% block action %}
+        <div style="text-align: center;">
+            <a href="{{ invitationUrl }}" style="display: inline-block; text-align: center; background: #1abb9c; padding: 18px 28px; color: #fff; text-decoration: none; border-radius: 3px;">
+                {{ 'calmfox_admin_invitation.email.accept'|trans({}, null, localeCode) }}
+            </a>
+        </div>
+    {% endblock %}
+
+    {% block details %}
+        <div style="text-align: center; margin-top: 30px; font-size: 14px; color: #777;">
+            {{ 'calmfox_admin_invitation.email.login'|trans({}, null, localeCode) }}: <strong>{{ adminUser.email }}</strong>
+        </div>
+    {% endblock %}
+{% endblock %}

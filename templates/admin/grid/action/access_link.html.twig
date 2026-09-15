@@ -1,0 +1,12 @@
+{# Invitation again for a pending account, a password reset link for an active one. #}
+{% set pending = not data.enabled and data.password is null %}
+{% set label = (pending ? 'calmfox_admin_invitation.ui.resend_invitation' : 'calmfox_admin_invitation.ui.send_password_reset')|trans %}
+
+<form action="{{ path('calmfox_admin_invitation_send_access_link', {id: data.id}) }}" method="post" class="d-inline"
+      onsubmit="return confirm({{ ((pending ? 'calmfox_admin_invitation.access_link.confirm_invitation' : 'calmfox_admin_invitation.access_link.confirm_reset')|trans({'%email%': data.email}))|json_encode }});">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('calmfox_admin_access_link' ~ data.id) }}">
+    <input type="hidden" name="_redirect" value="{{ app.request.requestUri }}">
+    <button class="btn btn-icon" type="submit" data-bs-toggle="tooltip" data-bs-title="{{ label }}" aria-label="{{ label }}">
+        {{ ux_icon(pending ? 'tabler:mail-forward' : 'tabler:key') }}
+    </button>
+</form>

@@ -1,0 +1,38 @@
+calmfox_admin_invitation:
+    ui:
+        invite: Invite
+        invite_administrator: Invite administrator
+        invite_help: We will send a link to this address. The invitee sets their own name and password.
+        send_invitation: Send invitation
+        accept_invitation: Set up your account
+        accept_invitation_lead: 'You have been invited to the administration panel as %email%.'
+        accept_and_log_in: Save and log in
+        password_requirements: 'At least %min_length% characters and hard to guess: mix upper and lower case letters, digits and symbols.'
+        generate_password: Generate a secure password
+        generated_password: Generated password
+        generated_password_hint: Save it in your password manager before you continue.
+        copy: Copy
+        copied: Copied
+        send_access_link: Send access link
+        resend_invitation: Send the invitation again
+        send_password_reset: Send a password reset link
+        account_access: Account access
+        access_pending: The invitation has not been accepted yet. You can send it again with a new link.
+        access_active: The administrator will get an e-mail with a link to set a new password themselves. Their current password keeps working until then.
+        password_reset_title: Set a new password
+        password_reset_lead: 'New password for %email%.'
+        password_reset_submit: Save new password
+    email:
+        subject: Invitation to the administration panel
+        hello: Hello
+        invited_to_panel: 'You have been invited to the administration panel. Click the button to set your name and password'
+        accept: Set up your account
+        login: Your login
+    password_reset_email:
+        subject: Set a new password for the administration panel
+        lead: 'An administrator has sent you a link to set a new password for the administration panel. Click the button and choose it yourself'
+        action: Set a new password
+        details: 'The link is valid until %date%. If you did not expect this e-mail, you can ignore it — your current password keeps working.'
+    access_link:
+        confirm_invitation: 'Send the invitation to %email% again?'
+        confirm_reset: 'Send a password reset link to %email%?'

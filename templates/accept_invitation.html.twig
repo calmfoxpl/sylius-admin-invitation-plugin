@@ -1,0 +1,9 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ 'calmfox_admin_invitation.ui.accept_invitation'|trans }}{% endblock %}
+
+{% block body_class %}d-flex flex-column{% endblock %}
+
+{% block body %}
+    {% hook 'calmfox_admin_invitation.accept_invitation' with { form, adminUser, token, generatedPasswordLength } %}
+{% endblock %}

@@ -1,0 +1,6 @@
+{% set adminUser = hookable_metadata.context.resource %}
+
+<form id="calmfox-admin-access-link" action="{{ path('calmfox_admin_invitation_send_access_link', {id: adminUser.id}) }}" method="post" hidden>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('calmfox_admin_access_link' ~ adminUser.id) }}">
+    <input type="hidden" name="_redirect" value="{{ app.request.requestUri }}">
+</form>

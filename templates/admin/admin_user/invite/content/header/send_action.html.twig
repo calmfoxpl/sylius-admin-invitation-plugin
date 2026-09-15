@@ -1,0 +1,5 @@
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+
+{% set form = hookable_metadata.context.form|default(null) %}
+
+{{ button.primary({ text: 'calmfox_admin_invitation.ui.send_invitation'|trans, type: 'submit', icon: 'tabler:send', form: form.vars.id|default(null) }) }}

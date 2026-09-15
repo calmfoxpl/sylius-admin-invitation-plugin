@@ -1,0 +1,33 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.admin_user.index.content.header.title_block.actions':
+            invite:
+                template: '@CalmfoxSyliusAdminInvitationPlugin/admin/admin_user/index/content/header/invite_action.html.twig'
+                priority: 100
+
+        # the invite page renders with prefixes [calmfox_admin_invitation.admin_user, sylius_admin.common],
+        # so everything not listed here (sidebar, navbar, flashes, ...) comes from the common create page
+        'calmfox_admin_invitation.admin_user.create.content.header':
+            breadcrumbs:
+                template: '@CalmfoxSyliusAdminInvitationPlugin/admin/admin_user/invite/content/header/breadcrumbs.html.twig'
+                priority: 100
+
+        'calmfox_admin_invitation.admin_user.create.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/create/content/header/title_block/title.html.twig'
+                configuration:
+                    header: 'calmfox_admin_invitation.ui.invite_administrator'
+                priority: 100
+
+        'calmfox_admin_invitation.admin_user.create.content.header.title_block.actions':
+            create:
+                template: '@CalmfoxSyliusAdminInvitationPlugin/admin/admin_user/invite/content/header/send_action.html.twig'
+                priority: 0
+
+        'calmfox_admin_invitation.admin_user.create.content.form.sections.general':
+            # Sylius' generic section renders the whole form; the plugin renders its field itself
+            default:
+                enabled: false
+            email:
+                template: '@CalmfoxSyliusAdminInvitationPlugin/admin/admin_user/invite/content/form/email.html.twig'
+                priority: 100
