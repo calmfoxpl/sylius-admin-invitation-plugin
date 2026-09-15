@@ -23,7 +23,7 @@ Invite administrators to the Sylius 2 panel by e-mail instead of handing out pas
 
 | | Version |
 |---|---|
-| PHP | 8.2, 8.3, 8.4 |
+| PHP | 8.2, 8.3, 8.4, 8.5 |
 | Sylius | 2.1, 2.2 |
 | Symfony | 7.1 or newer |
 
