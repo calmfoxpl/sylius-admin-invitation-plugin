@@ -19,6 +19,28 @@ Invite administrators to the Sylius 2 panel by e-mail instead of handing out pas
 - **Extension point:** `InvitationAcceptedEvent` lets other packages take over after acceptance. For example, [calmfox/sylius-admin-two-factor-plugin](https://github.com/calmfoxpl/sylius-admin-two-factor-plugin) sends the new administrator to two-factor setup.
 - **Translations:** English and Polish.
 
+## Screenshots
+
+*Administrators* gets an *Invite* button and a *Send a password reset link* action; the invite form asks only for an e-mail:
+
+<img src="https://raw.githubusercontent.com/calmfoxpl/sylius-admin-invitation-plugin/main/docs/images/administrators.png" width="800" alt="Administrators grid with the Invite button">
+
+<img src="https://raw.githubusercontent.com/calmfoxpl/sylius-admin-invitation-plugin/main/docs/images/invite-form.png" width="800" alt="Invite administrator form">
+
+The invitee gets an e-mail and sets their own name and a strong password, with a generator at hand:
+
+<table>
+  <tr>
+    <td valign="top"><img src="https://raw.githubusercontent.com/calmfoxpl/sylius-admin-invitation-plugin/main/docs/images/invitation-email.png" width="360" alt="Invitation e-mail"></td>
+    <td valign="top"><img src="https://raw.githubusercontent.com/calmfoxpl/sylius-admin-invitation-plugin/main/docs/images/accept-invitation.png" width="248" alt="Account setup page with a generated password"></td>
+    <td valign="top"><img src="https://raw.githubusercontent.com/calmfoxpl/sylius-admin-invitation-plugin/main/docs/images/password-policy.png" width="248" alt="A weak password is rejected"></td>
+  </tr>
+</table>
+
+The administrator's edit page gets an *Account access* card:
+
+<img src="https://raw.githubusercontent.com/calmfoxpl/sylius-admin-invitation-plugin/main/docs/images/account-access.png" width="352" alt="Account access card">
+
 ## Requirements
 
 | | Version |

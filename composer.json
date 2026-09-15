@@ -9,12 +9,18 @@
         "invitation"
     ],
     "license": "MIT",
+    "homepage": "https://github.com/calmfoxpl/sylius-admin-invitation-plugin",
     "authors": [
         {
             "name": "Calmfox",
             "homepage": "https://calmfox.pl"
         }
     ],
+    "support": {
+        "issues": "https://github.com/calmfoxpl/sylius-admin-invitation-plugin/issues",
+        "source": "https://github.com/calmfoxpl/sylius-admin-invitation-plugin",
+        "security": "https://github.com/calmfoxpl/sylius-admin-invitation-plugin/security/advisories/new"
+    },
     "require": {
         "php": "^8.2",
         "sylius/sylius": "^2.1",

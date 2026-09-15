@@ -5,6 +5,8 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-09-15
+
 ### Added
 
 - Invite administrators by e-mail from *Administrators → Invite* and with `calmfox:admin:invite`; the account stays disabled and without a password until the invitation is accepted.
@@ -15,3 +17,6 @@ All notable changes to this project are documented in this file. The format foll
 - Access rules for the plugin's public pages are applied by route name; no `access_control` entries are needed.
 - `InvitationAcceptedEvent` to take over the response after acceptance.
 - English and Polish translations.
+
+[Unreleased]: https://github.com/calmfoxpl/sylius-admin-invitation-plugin/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/calmfoxpl/sylius-admin-invitation-plugin/releases/tag/v1.0.0
