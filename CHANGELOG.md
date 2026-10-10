@@ -5,6 +5,8 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-10
+
 ### Fixed
 
 - Behind a reverse proxy that mounts the shop under a prefix (`X-Forwarded-Prefix`, e.g. `example.com/store`), the password reset form and the *Account access* buttons (grid and edit page) used the bare request path, lost the prefix and landed on whatever lives at the root of the domain. The forms now carry the page's full address and the controller accepts it as long as it points at this site.
@@ -22,5 +24,6 @@ All notable changes to this project are documented in this file. The format foll
 - `InvitationAcceptedEvent` to take over the response after acceptance.
 - English and Polish translations.
 
-[Unreleased]: https://github.com/calmfoxpl/sylius-admin-invitation-plugin/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/calmfoxpl/sylius-admin-invitation-plugin/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/calmfoxpl/sylius-admin-invitation-plugin/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/calmfoxpl/sylius-admin-invitation-plugin/releases/tag/v1.0.0
