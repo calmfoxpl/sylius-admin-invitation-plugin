@@ -5,3 +5,9 @@ sylius_mailer:
     sender:
         name: Test shop
         address: shop@example.com
+
+# The test client comes from 127.0.0.1: trust it, so a test can mount the application under a
+# prefix with X-Forwarded-Prefix the way a reverse proxy does.
+framework:
+    trusted_proxies: '127.0.0.1'
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port', 'x-forwarded-prefix']

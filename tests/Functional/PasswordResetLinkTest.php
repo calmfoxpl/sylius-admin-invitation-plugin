@@ -55,6 +55,42 @@ final class PasswordResetLinkTest extends FunctionalTestCase
         self::assertResponseRedirects('/admin/login', null, 'the link works only once');
     }
 
+    /**
+     * Behind a reverse proxy that mounts the shop under a prefix (`X-Forwarded-Prefix: /store`),
+     * the forms must carry the page's full address: a bare request path would lose the prefix
+     * and the browser would land on whatever else lives at the root of the domain.
+     */
+    public function testBehindAPrefixTheFormsKeepTheFullAddress(): void
+    {
+        $prefix = ['HTTP_X_FORWARDED_PREFIX' => '/store'];
+        $target = $this->createAdmin('target');
+        $this->logInAs($this->createAdmin());
+
+        $crawler = $this->client->request('GET', '/admin/users/', [], [], $prefix);
+        self::assertResponseIsSuccessful();
+        self::assertSame(
+            'http://localhost/store/admin/users/',
+            $crawler->filter('form[action="/store/admin/users/' . self::id($target) . '/access-link"] input[name="_redirect"]')->attr('value'),
+        );
+
+        $crawler = $this->client->request('GET', '/admin/users/' . self::id($target) . '/edit', [], [], $prefix);
+        $form = $crawler->filter('form#calmfox-admin-access-link');
+        self::assertSame('http://localhost/store/admin/users/' . self::id($target) . '/edit', $form->filter('input[name="_redirect"]')->attr('value'));
+
+        // the proxy strips the prefix before the request reaches the application
+        $this->client->request('POST', '/admin/users/' . self::id($target) . '/access-link', [
+            '_csrf_token' => $form->filter('input[name="_csrf_token"]')->attr('value'),
+            '_redirect' => $form->filter('input[name="_redirect"]')->attr('value'),
+        ], [], $prefix);
+        self::assertResponseRedirects('http://localhost/store/admin/users/' . self::id($target) . '/edit');
+
+        $link = $this->linkIn($this->lastEmail(), '/admin/forgotten-password/link/[A-Za-z0-9_~\-]+');
+        $this->client->request('GET', '/admin/logout');
+        $crawler = $this->client->request('GET', $link, [], [], $prefix);
+        self::assertResponseIsSuccessful();
+        self::assertSame('http://localhost/store' . $link, $crawler->filter('form[name="calmfox_admin_invitation_password_reset"]')->attr('action'));
+    }
+
     public function testAPendingAccountGetsItsInvitationAgain(): void
     {
         $pending = $this->createAdmin('pending', false, null);

@@ -59,8 +59,21 @@ final class SendAccessLinkActionTest extends TestCase
     public static function unsafeRedirects(): iterable
     {
         yield 'absolute URL' => ['https://evil.example/'];
+        yield 'another host that starts like this one' => ['http://localhost.evil.example/admin/users/'];
         yield 'protocol-relative URL' => ['//evil.example/'];
         yield 'empty' => [''];
+    }
+
+    /** The forms carry the page's full address, so a prefix added by a reverse proxy survives. */
+    public function testItGoesBackToTheFullAddressOfThisSite(): void
+    {
+        $adminUser = new AdminUser();
+        $adminUser->setEmail('pending@example.com');
+
+        $response = ($this->action(adminUser: $adminUser))($this->request('http://localhost/store/admin/users/1/edit'), 1);
+
+        self::assertInstanceOf(RedirectResponse::class, $response);
+        self::assertSame('http://localhost/store/admin/users/1/edit', $response->getTargetUrl());
     }
 
     public function testItGoesBackToALocalPage(): void
@@ -107,7 +120,7 @@ final class SendAccessLinkActionTest extends TestCase
 
     private function request(string $redirect = ''): Request
     {
-        $request = new Request(request: ['_csrf_token' => 'token', '_redirect' => $redirect]);
+        $request = Request::create('/admin/users/1/access-link', 'POST', ['_csrf_token' => 'token', '_redirect' => $redirect]);
         $request->setSession(new Session(new MockArraySessionStorage()));
 
         return $request;
