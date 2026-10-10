@@ -5,6 +5,10 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+### Fixed
+
+- Behind a reverse proxy that mounts the shop under a prefix (`X-Forwarded-Prefix`, e.g. `example.com/store`), the password reset form and the *Account access* buttons (grid and edit page) used the bare request path, lost the prefix and landed on whatever lives at the root of the domain. The forms now carry the page's full address and the controller accepts it as long as it points at this site.
+
 ## [1.0.0] - 2026-09-15
 
 ### Added

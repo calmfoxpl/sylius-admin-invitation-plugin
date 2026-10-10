@@ -2,6 +2,6 @@
 
 {% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
 
-{{ form_start(form, {'action': app.request.requestUri, 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': app.request.uri, 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
     {% hook 'form' with { form } %}
 {{ form_end(form, {'render_rest': true}) }}
